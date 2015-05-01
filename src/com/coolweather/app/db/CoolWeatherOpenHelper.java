@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
 	/**
@@ -18,14 +19,14 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
 	 */
 	public static final String CREATE_CITY = "create table city ("
 			+ "id integer primary key autoincrement, "
-			+ "city_name text "
-			+ "city_code text "
+			+ "city_name text, "
+			+ "city_code text, "
 			+ "province_id integer)";
 	/**
 	 * ¥¥Ω®county±Ì”Ôæ‰
 	 */
 	public static final String CREATE_COUNTY = "create table county ("
-			+ "id integer primary kay autoincrement,"
+			+ "id integer primary key autoincrement,"
 			+ "county_name text,"
 			+ "county_code text,"
 			+ "city_id integer)";
@@ -36,9 +37,15 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(CREATE_PROVINCE);
-		db.execSQL(CREATE_CITY);
-		db.execSQL(CREATE_COUNTY);
+		try {
+			db.execSQL(CREATE_PROVINCE);
+			db.execSQL(CREATE_CITY);
+			db.execSQL(CREATE_COUNTY);
+			Log.e("SQLiteDatabase", "success");
+		} catch (Exception e) {
+			Log.e("SQLiteDatabase", "error");
+		}
+		
 	}
 
 	@Override

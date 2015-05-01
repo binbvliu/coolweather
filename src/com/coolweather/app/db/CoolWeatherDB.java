@@ -74,7 +74,7 @@ public class CoolWeatherDB {
 		 */
 		public void insertCity(City city){
 			if(city!=null){
-				db.execSQL("insert into city (city_name,city_code,province_id)", new Object[]{city.getCityName(),city.getCityCode(),city.getProvinceId()});
+				db.execSQL("insert into city (city_name,city_code,province_id) values (?,?,?)", new Object[]{city.getCityName(),city.getCityCode(),city.getProvinceId()});
 			}
 		}
 		
@@ -85,7 +85,7 @@ public class CoolWeatherDB {
 		 */
 		public List<City> loadCitys(int provinceId){
 			List<City> cities = new ArrayList<City>();
-			Cursor cursor = db.rawQuery("select * form city where province_id = ?", new String[]{String.valueOf(provinceId)});
+			Cursor cursor = db.rawQuery("select * from city where province_id = ?", new String[]{String.valueOf(provinceId)});
 			while(cursor.moveToNext()){
 				City city = new City();
 				city.setId(cursor.getInt(cursor.getColumnIndex("id")));
@@ -102,7 +102,7 @@ public class CoolWeatherDB {
 		 */
 		public void saveCounty(County county){
 			if(county!=null){
-				db.execSQL("insert into county (county_name, county_code,city_id)", new Object[]{county.getCountyName(),county.getCountyCode(),county.getCityId()});
+				db.execSQL("insert into county (county_name, county_code,city_id) values (?,?,?)", new Object[]{county.getCountyName(),county.getCountyCode(),county.getCityId()});
 			}
 		}
 		
