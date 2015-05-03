@@ -1,6 +1,7 @@
 package com.coolweather.app.activity;
 
 import com.coolweather.app.R;
+import com.coolweather.app.service.AotuUpdateService;
 import com.coolweather.app.util.HttpCallBackListener;
 import com.coolweather.app.util.HttpUtil;
 import com.coolweather.app.util.Utility;
@@ -146,6 +147,10 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		weatherDespText.setText(preference.getString("weatherDesp", ""));
 		weatherInfoLayout.setVisibility(View.VISIBLE);
 		cityNameText.setVisibility(View.VISIBLE);
+		
+		//Æô¶¯·þÎñ
+		Intent intent = new Intent(this, AotuUpdateService.class);
+		startService(intent);
 	}
 	@Override
 	public void onClick(View v) {
